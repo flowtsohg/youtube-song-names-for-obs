@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "YouTube song names for OBS",
+  "description": "Detects when a YouTube tab plays a video, and downloads the name of the video to your downloads folder as currentsong.txt. This file can then be used as a text source in OBS to show song names.",
+  "version": "1.0",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "tabs",
+    "downloads"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "spectralcanine@gmail.com"
+    }
+  }
+}
