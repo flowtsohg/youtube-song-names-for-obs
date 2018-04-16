@@ -13,7 +13,7 @@ function stringToUrl(s) {
 function download(name) {
     if (name !== lastName) {
         lastName = name;
-        
+
         // Incognito mode to hide the download spam.
         chrome.downloads.download({ url: stringToUrl(name), filename: 'currentsong.txt', conflictAction: 'overwrite', incognito: true });
     }
@@ -35,7 +35,7 @@ function update() {
 function getScript(url) {
     if (url.startsWith('https://www.youtube.com/watch')) {
         return 'youtube.js';
-    } else if (url === 'https://beta.nightbot.tv/song_requests') {
+    } else if (url.startsWith('https://beta.nightbot.tv/song_requests')) {
         return 'nightbot.js';
     }
 }
@@ -135,9 +135,6 @@ function initialize() {
         }
     });
 }
-
-// Initialize the name.
-download('');
 
 // Start.
 initialize();

@@ -1,9 +1,10 @@
-// Youtube update the title with song names.
+// Youtube updates the title with song names.
 let element = document.querySelector('title');
 
 // Sends the name.
 function sendName() {
-    chrome.runtime.sendMessage({ name: element.textContent.replace(' - YouTube', '') });
+    // Slice out the " - YouTube" part.
+    chrome.runtime.sendMessage({ name: element.textContent.slice(0, -10) });
 }
 
 // Send the current name.
