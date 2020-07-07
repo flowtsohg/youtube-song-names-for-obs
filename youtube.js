@@ -3,8 +3,13 @@ let element = document.querySelector('title');
 
 // Sends the name.
 function sendName() {
-    // Slice out the " - YouTube" part.
-    chrome.runtime.sendMessage({ name: element.textContent.slice(0, -10) });
+    let name = element.textContent;
+
+    if (name !== 'YouTube Music') {
+        // www.youtube.com/watch titles end with " - YouTube".
+        // music.youtube.com/watch titles end with " - YouTube Music".
+        chrome.runtime.sendMessage({ name: name.slice(0, name.lastIndexOf(' - YouTube')) });
+    }
 }
 
 // Send the current name.

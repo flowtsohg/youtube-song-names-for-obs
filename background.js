@@ -33,7 +33,7 @@ chrome.storage.onChanged.addListener((changes) => {
 
 // Gets the url to a blob containing the given string.
 function stringToUrl(s) {
-  return URL.createObjectURL(new Blob([s], { type: "text/plain" }));
+  return URL.createObjectURL(new Blob([s], {type: "text/plain"}));
 }
 
 // Given a name, if it's different than the last name, download it.
@@ -45,8 +45,10 @@ function download(name, redownload) {
     let formatted = nameFormat.replace(/\{title\}/g, name);
 
     // Download the name.
-    // Incognito mode to hide the download spam.
-    chrome.downloads.download({ url: stringToUrl(formatted), filename: 'currentsong.txt', conflictAction: 'overwrite', incognito: true });
+    chrome.downloads.download({url: stringToUrl(formatted), filename: 'currentsong.txt', conflictAction: 'overwrite'}, (downloadId) => {
+      // Erase the download record, to not spam the user's downloads list.
+      chrome.downloads.erase({id: downloadId});
+    });
   }
 }
 
@@ -64,9 +66,9 @@ function update() {
 
 // Map from urls to the file that handles them.
 function getScript(url) {
-  if (url.startsWith('https://www.youtube.com/watch')) {
+  if (url.startsWith('https://www.youtube.com/watch') || url.startsWith('https://music.youtube.com/watch')) {
     return 'youtube.js';
-  } else if (url.startsWith('https://beta.nightbot.tv/song_requests')) {
+  } else if (url.startsWith('https://nightbot.tv/song_requests')) {
     return 'nightbot.js';
   }
 }
@@ -81,9 +83,9 @@ function add(id, url, audible) {
   let script = getScript(url);
 
   if (script && !tabs.has(id)) {
-    tabs.set(id, { name: '', audible: audible || false });
+    tabs.set(id, {name: '', audible: audible || false});
 
-    chrome.tabs.executeScript(id, { file: script, runAt: "document_end" });
+    chrome.tabs.executeScript(id, {file: script, runAt: "document_end"});
 
     update();
   }

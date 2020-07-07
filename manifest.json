@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "YouTube song names for OBS",
     "description": "Detects when a YouTube tab plays a video, and downloads the name of the video to your downloads folder as currentsong.txt. This file can then be used as a text source in OBS to show song names.",
-    "version": "1.3",
+    "version": "1.3.2",
     "options_ui": {
         "page": "options.html",
         "browser_style": true
@@ -18,7 +18,8 @@
         "downloads",
         "webNavigation",
         "https://www.youtube.com/watch",
-        "https://beta.nightbot.tv/song_requests"
+        "https://nightbot.tv/song_requests",
+        "https://music.youtube.com/watch"
     ],
     "applications": {
         "gecko": {
