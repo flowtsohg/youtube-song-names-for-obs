@@ -66,10 +66,12 @@ function update() {
 
 // Map from urls to the file that handles them.
 function getScript(url) {
-  if (url.startsWith('https://www.youtube.com/watch') || url.startsWith('https://music.youtube.com/watch')) {
+  if (url.startsWith('https://www.youtube.com/watch')) {
     return 'youtube.js';
   } else if (url.startsWith('https://nightbot.tv/song_requests')) {
     return 'nightbot.js';
+  } else if (url.startsWith('https://music.youtube.com/')) {
+    return 'youtubemusic.js';
   }
 }
 
